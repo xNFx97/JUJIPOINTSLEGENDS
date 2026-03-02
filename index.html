@@ -1,45 +1,101 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Reclama tus Jujis</title>
+    <title>Reclama tus 2500 Jujis</title>
     <style>
         body {
             background: black;
             color: #00ff00;
-            text-align: center;
             font-family: Arial;
-            margin-top: 80px;
+            margin: 40px;
+            display: flex;
+            justify-content: space-between;
         }
+
+        .principal {
+            width: 60%;
+            text-align: center;
+        }
+
+        .contadorBox {
+            width: 35%;
+            border-left: 2px solid #00ff00;
+            padding-left: 20px;
+            font-size: 22px;
+        }
+
         input, button {
             padding: 10px;
             font-size: 16px;
             margin: 10px;
         }
+
         button {
             background: #00ff00;
             color: black;
             border: none;
             cursor: pointer;
         }
+
         button:hover {
             background: white;
+        }
+
+        #barraContainer {
+            width: 80%;
+            background: #333;
+            margin: 20px auto;
+            height: 30px;
+            border-radius: 20px;
+            overflow: hidden;
+            display: none;
+        }
+
+        #barra {
+            height: 100%;
+            width: 0%;
+            background: #00ff00;
+            transition: width 0.2s;
         }
     </style>
 </head>
 <body>
 
-    <h1>⚡ Reclama tus 2500 Jujis ⚡</h1>
+<div class="principal">
 
-    <div id="paso1">
-        <p>Ingresa tu nickname:</p>
-        <input type="text" id="nickname" placeholder="Tu nickname">
-        <br>
-        <button onclick="trabajas()">Continuar</button>
+<h1>⚡ Reclama tus 2500 Jujis ⚡</h1>
+
+<div id="contenido">
+    <p>Ingresa tu nickname:</p>
+    <input type="text" id="nickname" placeholder="Tu nickname">
+    <br>
+    <button onclick="trabajas()">Continuar</button>
+</div>
+
+<div id="barraContainer">
+    <div id="barra"></div>
+</div>
+
+</div>
+
+<div class="contadorBox">
+    <h2>💰 Jujupoints reclamados</h2>
+    <div id="contador" style="font-size:30px; font-weight:bold;">
+        39483847347
     </div>
-
-    <div id="contenido"></div>
+</div>
 
 <script>
+
+let nickGlobal = "";
+
+// CONTADOR FALSO QUE SUBE SOLO
+let numero = 39483847347;
+setInterval(() => {
+    numero += Math.floor(Math.random() * 50);
+    document.getElementById("contador").innerText = numero.toLocaleString();
+}, 500);
+
 function trabajas() {
     let nick = document.getElementById("nickname").value;
     if(nick === "") {
@@ -47,7 +103,9 @@ function trabajas() {
         return;
     }
 
-    document.getElementById("paso1").innerHTML = `
+    nickGlobal = nick;
+
+    document.getElementById("contenido").innerHTML = `
         <p>${nick}, ¿Trabajas para Juju?</p>
         <button onclick="noTrabaja()">No</button>
         <button onclick="siTrabaja()">Sí</button>
@@ -55,13 +113,13 @@ function trabajas() {
 }
 
 function noTrabaja() {
-    document.getElementById("paso1").innerHTML = `
+    document.getElementById("contenido").innerHTML = `
         <h2>No reclamas tus puntos 😢</h2>
     `;
 }
 
 function siTrabaja() {
-    document.getElementById("paso1").innerHTML = `
+    document.getElementById("contenido").innerHTML = `
         <p>¿Jugarás League of Legends hoy para reclamar 2500 Jujis?</p>
         <button onclick="confirmar()">Sí</button>
         <button onclick="rechazar()">No</button>
@@ -69,22 +127,44 @@ function siTrabaja() {
 }
 
 function confirmar() {
-    document.getElementById("paso1").innerHTML = `
-        <h2>🔥 CONFIRMA AHORA 🔥</h2>
+    document.getElementById("contenido").innerHTML = `
+        <h2>Verificando puntos...</h2>
+    `;
+
+    document.getElementById("barraContainer").style.display = "block";
+
+    let progreso = 0;
+    let barra = document.getElementById("barra");
+
+    let intervalo = setInterval(() => {
+        progreso += 5;
+        barra.style.width = progreso + "%";
+
+        if(progreso >= 100) {
+            clearInterval(intervalo);
+            setTimeout(finalizar, 800);
+        }
+    }, 100);
+}
+
+function finalizar() {
+    document.getElementById("contenido").innerHTML = `
+        <h2>🔥 ${nickGlobal}, CONFIRMA AHORA 🔥</h2>
         <p>Haz clic abajo para enviar confirmación por WhatsApp</p>
         <button onclick="enviar()">Enviar al WhatsApp</button>
     `;
 }
 
 function enviar() {
-    window.location.href = "https://wa.me/573001234567?text=Confirmo%20que%20jugaré%20League%20of%20Legends%20hoy%20para%20reclamar%202500%20Jujis";
+    window.location.href = "https://wa.me/573123853537?text=Confirmo%20que%20jugaré%20League%20of%20Legends%20hoy%20para%20reclamar%202500%20Jujis";
 }
 
 function rechazar() {
-    document.getElementById("paso1").innerHTML = `
-        <h2>😈 El sistema te ha marcado como: Esclavo de juju</h2>
+    document.getElementById("contenido").innerHTML = `
+        <h2>😈 El sistema te ha marcado como: ESCLAVO DE MIERDA DE JUJU</h2>
     `;
 }
+
 </script>
 
 </body>
