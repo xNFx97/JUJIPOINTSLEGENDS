@@ -52,7 +52,6 @@ button:hover{
     display:none;
     margin-top:20px;
     font-weight:bold;
-    color:#00ff88;
 }
 </style>
 </head>
@@ -69,23 +68,25 @@ button:hover{
 
     <button onclick="confirmar()">Confirmar y Reclamar</button>
 
-    <p id="mensajeFinal">
-        Tus Jujupoints serán reclamados después de 3 win esta noche en la grieta 🔥
-    </p>
+    <p id="mensajeFinal"></p>
 </div>
 
 <script>
 function confirmar(){
-    window.open("https://chat.whatsapp.com/EVdEt1Eh5gOGTNESgc2XQo?mode=gi_t","_blank");
-    document.getElementById("mensajeFinal").style.display="block";
-    setTimeout(function(){
-        window.location.href = window.location.href;
-    },3000);
+    let respuesta = confirm("¿Vas a jugar League of Legends esta noche?");
+
+    let mensaje = document.getElementById("mensajeFinal");
+    mensaje.style.display = "block";
+
+    if(respuesta){
+        mensaje.style.color = "#00ff88";
+        mensaje.innerHTML = "Tus Jujupoints serán reclamados después de 3 win esta noche en la grieta 🔥";
+    } else {
+        mensaje.style.color = "#ff4444";
+        mensaje.innerHTML = "ESCLAVO DE MIERDA HP, BASURA ASQUEROSA TRIPLE MALPARIDDA ABORTO DE MICO 😈";
+    }
 }
 </script>
-
-</body>
-</html>
 
 </body>
 </html>
