@@ -1,178 +1,91 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <title>Reclama tus 2500 Jujis</title>
-    <style>
-        body {
-            background: black;
-            color: #00ff00;
-            font-family: Arial;
-            margin: 40px;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .principal {
-            width: 60%;
-            text-align: center;
-        }
-
-        .contadorBox {
-            width: 35%;
-            border-left: 2px solid #00ff00;
-            padding-left: 20px;
-            font-size: 22px;
-        }
-
-        input, button {
-            padding: 10px;
-            font-size: 16px;
-            margin: 10px;
-        }
-
-        button {
-            background: #00ff00;
-            color: black;
-            border: none;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background: white;
-        }
-
-        #barraContainer {
-            width: 80%;
-            background: #333;
-            margin: 20px auto;
-            height: 30px;
-            border-radius: 20px;
-            overflow: hidden;
-            display: none;
-        }
-
-        #barra {
-            height: 100%;
-            width: 0%;
-            background: #00ff00;
-            transition: width 0.2s;
-        }
-    </style>
+<meta charset="UTF-8">
+<title>Reclama tus Jujupoints</title>
+<style>
+body{
+    background:#0f0f0f;
+    color:#00ff88;
+    font-family:Arial, sans-serif;
+    text-align:center;
+    padding-top:50px;
+}
+.box{
+    background:#1a1a1a;
+    padding:30px;
+    border-radius:15px;
+    width:350px;
+    margin:auto;
+    box-shadow:0 0 20px #00ff88;
+}
+.progress{
+    width:100%;
+    background:#333;
+    border-radius:20px;
+    overflow:hidden;
+    margin:20px 0;
+}
+.progress-bar{
+    height:25px;
+    width:78%;
+    background:linear-gradient(90deg,#00ff88,#00cc66);
+    text-align:center;
+    line-height:25px;
+    color:#000;
+    font-weight:bold;
+}
+button{
+    background:#00ff88;
+    color:#000;
+    border:none;
+    padding:12px 20px;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:bold;
+    font-size:15px;
+}
+button:hover{
+    background:#00cc66;
+}
+#mensajeFinal{
+    display:none;
+    margin-top:20px;
+    font-weight:bold;
+    color:#00ff88;
+}
+</style>
 </head>
 <body>
 
-<div class="principal">
+<div class="box">
+    <h2>Reclama tus Jujupoints</h2>
 
-<h1>⚡ Reclama tus 2500 Jujis ⚡</h1>
-
-<div id="contenido">
-    <p>Ingresa tu nickname:</p>
-    <input type="text" id="nickname" placeholder="Tu nickname">
-    <br>
-    <button onclick="trabajas()">Continuar</button>
-</div>
-
-<div id="barraContainer">
-    <div id="barra"></div>
-</div>
-
-</div>
-
-<div class="contadorBox">
-    <h2>💰 Jujupoints reclamados</h2>
-    <div id="contador" style="font-size:30px; font-weight:bold;">
-        39483847347
+    <div class="progress">
+        <div class="progress-bar">78%</div>
     </div>
+
+    <p><strong>39483847347</strong> Jujupoints reclamados</p>
+
+    <button onclick="confirmar()">Confirmar y Reclamar</button>
+
+    <p id="mensajeFinal">
+        Tus Jujupoints serán reclamados después de 3 win esta noche en la grieta 🔥
+    </p>
 </div>
 
 <script>
-
-let nickGlobal = "";
-
-// CONTADOR FALSO QUE SUBE SOLO
-let numero = 39483847347;
-setInterval(() => {
-    numero += Math.floor(Math.random() * 50);
-    document.getElementById("contador").innerText = numero.toLocaleString();
-}, 500);
-
-function trabajas() {
-    let nick = document.getElementById("nickname").value;
-    if(nick === "") {
-        alert("Ingresa tu nickname primero 😎");
-        return;
-    }
-
-    nickGlobal = nick;
-
-    document.getElementById("contenido").innerHTML = `
-        <p>${nick}, ¿Trabajas para Juju?</p>
-        <button onclick="noTrabaja()">No</button>
-        <button onclick="siTrabaja()">Sí</button>
-    `;
+function confirmar(){
+    window.open("https://chat.whatsapp.com/EVdEt1Eh5gOGTNESgc2XQo?mode=gi_t","_blank");
+    document.getElementById("mensajeFinal").style.display="block";
+    setTimeout(function(){
+        window.location.href = window.location.href;
+    },3000);
 }
-
-function noTrabaja() {
-    document.getElementById("contenido").innerHTML = `
-        <h2>No reclamas tus puntos 😢</h2>
-    `;
-}
-
-function siTrabaja() {
-    document.getElementById("contenido").innerHTML = `
-        <p>¿Jugarás League of Legends hoy para reclamar 2500 Jujis?</p>
-        <button onclick="confirmar()">Sí</button>
-        <button onclick="rechazar()">No</button>
-    `;
-}
-
-function confirmar() {
-    document.getElementById("contenido").innerHTML = `
-        <h2>Verificando puntos...</h2>
-    `;
-
-    document.getElementById("barraContainer").style.display = "block";
-
-    let progreso = 0;
-    let barra = document.getElementById("barra");
-
-    let intervalo = setInterval(() => {
-        progreso += 5;
-        barra.style.width = progreso + "%";
-
-        if(progreso >= 100) {
-            clearInterval(intervalo);
-            setTimeout(finalizar, 800);
-        }
-    }, 100);
-}
-
-function finalizar() {
-    document.getElementById("contenido").innerHTML = `
-        <h2>🔥 ${nickGlobal}, PUNTOS APROBADOS 🔥</h2>
-        <p>Procesando entrega de 2500 Jujis...</p>
-    `;
-
-    setTimeout(() => {
-        document.getElementById("contenido").innerHTML = `
-            <h2>⚡ ACCESO EXCLUSIVO DESBLOQUEADO ⚡</h2>
-            <p>Para completar el proceso entra al grupo secreto de Jujupoints</p>
-            <button onclick="entrarGrupo()">ENTRAR AHORA</button>
-        `;
-    }, 3000);
-}
-
-function entrarGrupo() {
-    window.location.href = "https://chat.whatsapp.com/EVdEt1Eh5gOGTNESgc2XQo?mode=gi_t";
-}
-
-function rechazar() {
-    document.getElementById("contenido").innerHTML = `
-        <h2>😈 El sistema te ha marcado como: UN VALEDOR DE MONDAAAAAA</h2>
-    `;
-}
-
 </script>
+
+</body>
+</html>
 
 </body>
 </html>
