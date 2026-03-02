@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Reclama tus puntos</title>
+    <style>
+        body {
+            background: black;
+            color: #00ff00;
+            text-align: center;
+            font-family: Arial;
+            margin-top: 100px;
+        }
+        button {
+            background: #00ff00;
+            color: black;
+            padding: 15px 30px;
+            font-size: 20px;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background: white;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>⚡ RECLAMA TUS PUNTOS ⚡</h1>
+    <button onclick="generarPuntos()">CLIC AQUÍ</button>
+    <h2 id="resultado"></h2>
+
+    <script>
+        function generarPuntos() {
+            let puntos = Math.floor(Math.random() * 10000) + 1;
+            document.getElementById("resultado").innerHTML =
+                "😱 ¡Ganaste " + puntos + " puntos!";
+        }
+    </script>
+
+</body>
+</html>
