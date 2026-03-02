@@ -1,20 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Reclama tus puntos</title>
+    <title>Reclama tus Jujis</title>
     <style>
         body {
             background: black;
             color: #00ff00;
             text-align: center;
             font-family: Arial;
-            margin-top: 100px;
+            margin-top: 80px;
+        }
+        input, button {
+            padding: 10px;
+            font-size: 16px;
+            margin: 10px;
         }
         button {
             background: #00ff00;
             color: black;
-            padding: 15px 30px;
-            font-size: 20px;
             border: none;
             cursor: pointer;
         }
@@ -25,17 +28,64 @@
 </head>
 <body>
 
-    <h1>⚡ RECLAMA TUS PUNTOS ⚡</h1>
-    <button onclick="generarPuntos()">CLIC AQUÍ</button>
-    <h2 id="resultado"></h2>
+    <h1>⚡ Reclama tus 2500 Jujis ⚡</h1>
 
-    <script>
-        function generarPuntos() {
-            let puntos = Math.floor(Math.random() * 10000) + 1;
-            document.getElementById("resultado").innerHTML =
-                "😱 ¡Ganaste " + puntos + " puntos!";
-        }
-    </script>
+    <div id="paso1">
+        <p>Ingresa tu nickname:</p>
+        <input type="text" id="nickname" placeholder="Tu nickname">
+        <br>
+        <button onclick="trabajas()">Continuar</button>
+    </div>
+
+    <div id="contenido"></div>
+
+<script>
+function trabajas() {
+    let nick = document.getElementById("nickname").value;
+    if(nick === "") {
+        alert("Ingresa tu nickname primero 😎");
+        return;
+    }
+
+    document.getElementById("paso1").innerHTML = `
+        <p>${nick}, ¿Trabajas para Juju?</p>
+        <button onclick="noTrabaja()">No</button>
+        <button onclick="siTrabaja()">Sí</button>
+    `;
+}
+
+function noTrabaja() {
+    document.getElementById("paso1").innerHTML = `
+        <h2>No reclamas tus puntos 😢</h2>
+    `;
+}
+
+function siTrabaja() {
+    document.getElementById("paso1").innerHTML = `
+        <p>¿Jugarás League of Legends hoy para reclamar 2500 Jujis?</p>
+        <button onclick="confirmar()">Sí</button>
+        <button onclick="rechazar()">No</button>
+    `;
+}
+
+function confirmar() {
+    document.getElementById("paso1").innerHTML = `
+        <h2>🔥 CONFIRMA AHORA 🔥</h2>
+        <p>Haz clic abajo para enviar confirmación por WhatsApp</p>
+        <button onclick="enviar()">Enviar al WhatsApp</button>
+    `;
+}
+
+function enviar() {
+    window.location.href = "https://wa.me/573001234567?text=Confirmo%20que%20jugaré%20League%20of%20Legends%20hoy%20para%20reclamar%202500%20Jujis";
+}
+
+function rechazar() {
+    document.getElementById("paso1").innerHTML = `
+        <h2>😈 El sistema te ha marcado como: Esclavo de juju</h2>
+    `;
+}
+</script>
 
 </body>
 </html>
