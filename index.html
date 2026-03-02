@@ -66,13 +66,21 @@ button:hover{
 
     <p><strong>39483847347</strong> Jujupoints reclamados</p>
 
-    <button onclick="confirmar()">Confirmar y Reclamar</button>
+    <button onclick="iniciarProceso()">Confirmar y Reclamar</button>
 
     <p id="mensajeFinal"></p>
 </div>
 
 <script>
-function confirmar(){
+function iniciarProceso(){
+
+    let nickname = prompt("Ingresa tu nickname:");
+
+    if(!nickname || nickname.trim() === ""){
+        alert("Debes ingresar un nickname válido 😅");
+        return;
+    }
+
     let respuesta = confirm("¿Vas a jugar League of Legends esta noche?");
 
     let mensaje = document.getElementById("mensajeFinal");
@@ -80,10 +88,10 @@ function confirmar(){
 
     if(respuesta){
         mensaje.style.color = "#00ff88";
-        mensaje.innerHTML = "Tus Jujupoints serán reclamados después de 3 win esta noche en la grieta 🔥";
+        mensaje.innerHTML = "🔥 " + nickname + ", tus Jujupoints serán reclamados después de 3 win esta noche en la grieta.";
     } else {
         mensaje.style.color = "#ff4444";
-        mensaje.innerHTML = "ESCLAVO DE MIERDA HP, BASURA ASQUEROSA TRIPLE MALPARIDDA ABORTO DE MICOOOOO 😈";
+        mensaje.innerHTML = "😈 " + nickname + "...ESCLAVO DE MIERDA HP, BASURA ASQUEROSA TRIESCLAVO DE MIERDA HP, BASURA ASQUEROSA TRIPLE MALPARIDDA ABORTO DE MICOOOOO 😈.";
     }
 }
 </script>
