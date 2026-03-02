@@ -2,23 +2,42 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Reclama tus Jujupoints</title>
+<title>Reclama tus Juju Points</title>
+
 <style>
 body{
     background:#0f0f0f;
     color:#00ff88;
     font-family:Arial, sans-serif;
     text-align:center;
-    padding-top:50px;
+    padding-top:60px;
 }
+
+a{
+    color:#00ff88;
+    font-size:22px;
+    font-weight:bold;
+    text-decoration:none;
+    border:2px solid #00ff88;
+    padding:12px 20px;
+    border-radius:12px;
+}
+
+a:hover{
+    background:#00ff88;
+    color:#000;
+}
+
 .box{
+    display:none;
     background:#1a1a1a;
     padding:30px;
     border-radius:15px;
-    width:350px;
-    margin:auto;
-    box-shadow:0 0 20px #00ff88;
+    width:400px;
+    margin:40px auto;
+    box-shadow:0 0 25px #00ff88;
 }
+
 .progress{
     width:100%;
     background:#333;
@@ -26,30 +45,18 @@ body{
     overflow:hidden;
     margin:20px 0;
 }
+
 .progress-bar{
     height:25px;
-    width:78%;
+    width:82%;
     background:linear-gradient(90deg,#00ff88,#00cc66);
     text-align:center;
     line-height:25px;
     color:#000;
     font-weight:bold;
 }
-button{
-    background:#00ff88;
-    color:#000;
-    border:none;
-    padding:12px 20px;
-    border-radius:10px;
-    cursor:pointer;
-    font-weight:bold;
-    font-size:15px;
-}
-button:hover{
-    background:#00cc66;
-}
-#mensajeFinal{
-    display:none;
+
+#mensaje{
     margin-top:20px;
     font-weight:bold;
 }
@@ -57,41 +64,62 @@ button:hover{
 </head>
 <body>
 
-<div class="box">
-    <h2>Reclama tus Jujupoints</h2>
+<a href="#" onclick="iniciar()">🔥 Reclama tus Juju Points 🔥</a>
+
+<div class="box" id="panel">
+    <h2>Panel de Validación HuHu</h2>
 
     <div class="progress">
-        <div class="progress-bar">78%</div>
+        <div class="progress-bar">82%</div>
     </div>
 
-    <p><strong>39483847347</strong> Jujupoints reclamados</p>
+    <p><strong>2500 HuHu Points aprobados</strong></p>
+    <p>39483847347 Juju Points han sido reclamados</p>
 
-    <button onclick="iniciarProceso()">Confirmar y Reclamar</button>
-
-    <p id="mensajeFinal"></p>
+    <p id="mensaje"></p>
 </div>
 
 <script>
-function iniciarProceso(){
+let nickname = "";
 
-    let nickname = prompt("Ingresa tu nickname:");
+function iniciar(){
+
+    nickname = prompt("Ingresa tu nickname:");
 
     if(!nickname || nickname.trim() === ""){
         alert("Debes ingresar un nickname válido 😅");
         return;
     }
 
-    let respuesta = confirm("¿Vas a jugar League of Legends esta noche?");
+    let confirmarNick = confirm("Confirmas que tu nickname es: " + nickname + "?");
 
-    let mensaje = document.getElementById("mensajeFinal");
-    mensaje.style.display = "block";
+    if(!confirmarNick){
+        alert("Proceso cancelado.");
+        return;
+    }
 
-    if(respuesta){
-        mensaje.style.color = "#00ff88";
-        mensaje.innerHTML = "🔥 " + nickname + ", tus Jujupoints serán reclamados después de 3 win esta noche en la grieta.";
+    document.getElementById("panel").style.display="block";
+
+    let trabaja = confirm("¿Trabajas para HuHu?");
+
+    let mensaje = document.getElementById("mensaje");
+
+    if(!trabaja){
+        mensaje.style.color="#ff4444";
+        mensaje.innerHTML = nickname + ", eres libre de ser un esclavo 😈";
+        return;
+    }
+
+    alert("Estás a un paso de recibir tus 2500 HuHu Points.");
+
+    let juega = confirm("Confirma si vas a jugar League of Legends esta noche.");
+
+    if(!juega){
+        mensaje.style.color="#ff4444";
+        mensaje.innerHTML = nickname + ", eres un mal jugador. Vuelve cuando estés listo 😈";
     } else {
-        mensaje.style.color = "#ff4444";
-        mensaje.innerHTML = "😈 " + nickname + "...ESCLAVO DE MIERDA HP, BASURA ASQUEROSA TRIESCLAVO DE MIERDA HP, BASURA ASQUEROSA TRIPLE MALPARIDDA ABORTO DE MICOOOOO 😈.";
+        mensaje.style.color="#00ff88";
+        mensaje.innerHTML = "Perfecto " + nickname + " 🔥 Estás agendado para jugar esta noche League of Legends. Reclamarás tus 2500 HuHu Points después de tres wins.";
     }
 }
 </script>
