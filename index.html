@@ -55,6 +55,7 @@ body{
     line-height:25px;
     color:#000;
     font-weight:bold;
+    transition:width 0.3s;
 }
 
 input{
@@ -100,14 +101,14 @@ button{
 
 <div class="box" id="panel">
 
-    <h2>Panel de Validación HuHu</h2>
+    <h2>Panel de Validación Juju</h2>
 
     <div class="progress">
-        <div class="progress-bar">82%</div>
+        <div class="progress-bar" id="barra">82%</div>
     </div>
 
     <p><strong>2500 Juju Points aprobados</strong></p>
-    <p>39483847347 Juju Points han sido reclamados</p>
+    <p><span id="contador">39483847347</span> Juju Points han sido reclamados</p>
 
     <!-- Paso 1 -->
     <div id="paso1">
@@ -138,6 +139,13 @@ button{
 <script>
 
 let nick = "";
+let contador = 39483847347;
+
+// contador automático constante
+setInterval(function(){
+    contador += Math.floor(Math.random() * 50);
+    document.getElementById("contador").innerText = contador;
+}, 800);
 
 function mostrarPanel(){
     document.getElementById("panel").style.display="block";
@@ -155,11 +163,11 @@ function confirmarNick(){
     document.getElementById("paso2").classList.remove("oculto");
 }
 
-function trabajaHuHu(respuesta){
+function trabajaJuju(respuesta){
     if(!respuesta){
         document.getElementById("mensaje").style.color="#ff4444";
         document.getElementById("mensaje").innerHTML =
-        nick + ", eres libre de ser un esclavo 😈";
+        nick + ", eres libre de ser un esclavo puedes jugar league of legends 😈";
         document.getElementById("paso2").classList.add("oculto");
         return;
     }
@@ -177,9 +185,24 @@ function jugarLoL(respuesta){
         document.getElementById("mensaje").innerHTML =
         nick + ", VALES MONDAAAAAA, MALAPRIDA COYAAA ABORTO DE MICOOO 😈";
     } else {
-        document.getElementById("mensaje").style.color="#00ff88";
-        document.getElementById("mensaje").innerHTML =
-        "Perfecto " + nick + " 🔥 Estás agendado para jugar esta noche League of Legends. Reclamarás tus 2500 HuHu Points después de tres wins.";
+
+        // animar barra al 100%
+        let barra = document.getElementById("barra");
+        let progreso = 82;
+
+        let intervalo = setInterval(function(){
+            if(progreso >= 100){
+                clearInterval(intervalo);
+                barra.innerText = "100%";
+                document.getElementById("mensaje").style.color="#00ff88";
+                document.getElementById("mensaje").innerHTML =
+                "Perfecto " + nick + " 🔥 Estás agendado para jugar esta noche League of Legends. Reclamarás tus 2500 Juju Points después de tres wins.";
+            } else {
+                progreso++;
+                barra.style.width = progreso + "%";
+                barra.innerText = progreso + "%";
+            }
+        }, 40);
     }
 }
 
