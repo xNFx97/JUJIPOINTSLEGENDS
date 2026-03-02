@@ -13,7 +13,7 @@ body{
     padding-top:60px;
 }
 
-a{
+.boton-link{
     color:#00ff88;
     font-size:22px;
     font-weight:bold;
@@ -21,9 +21,10 @@ a{
     border:2px solid #00ff88;
     padding:12px 20px;
     border-radius:12px;
+    cursor:pointer;
 }
 
-a:hover{
+.boton-link:hover{
     background:#00ff88;
     color:#000;
 }
@@ -33,7 +34,7 @@ a:hover{
     background:#1a1a1a;
     padding:30px;
     border-radius:15px;
-    width:400px;
+    width:420px;
     margin:40px auto;
     box-shadow:0 0 25px #00ff88;
 }
@@ -56,17 +57,49 @@ a:hover{
     font-weight:bold;
 }
 
+input{
+    padding:10px;
+    width:80%;
+    border-radius:8px;
+    border:none;
+    margin-top:10px;
+}
+
+button{
+    margin-top:15px;
+    padding:10px 18px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.btn-si{
+    background:#00ff88;
+    color:#000;
+}
+
+.btn-no{
+    background:#ff4444;
+    color:#fff;
+}
+
 #mensaje{
     margin-top:20px;
     font-weight:bold;
+}
+
+.oculto{
+    display:none;
 }
 </style>
 </head>
 <body>
 
-<a href="#" onclick="iniciar()">🔥 Reclama tus Juju Points 🔥</a>
+<div class="boton-link" onclick="mostrarPanel()">🔥 Reclama tus Juju Points 🔥</div>
 
 <div class="box" id="panel">
+
     <h2>Panel de Validación HuHu</h2>
 
     <div class="progress">
@@ -76,52 +109,80 @@ a:hover{
     <p><strong>2500 HuHu Points aprobados</strong></p>
     <p>39483847347 Juju Points han sido reclamados</p>
 
+    <!-- Paso 1 -->
+    <div id="paso1">
+        <p>Ingresa tu nickname:</p>
+        <input type="text" id="nickname">
+        <br>
+        <button class="btn-si" onclick="confirmarNick()">Confirmar</button>
+    </div>
+
+    <!-- Paso 2 -->
+    <div id="paso2" class="oculto">
+        <p>¿Trabajas para HuHu?</p>
+        <button class="btn-si" onclick="trabajaHuHu(true)">Sí</button>
+        <button class="btn-no" onclick="trabajaHuHu(false)">No</button>
+    </div>
+
+    <!-- Paso 3 -->
+    <div id="paso3" class="oculto">
+        <p>¿Vas a jugar League of Legends esta noche?</p>
+        <button class="btn-si" onclick="jugarLoL(true)">Sí</button>
+        <button class="btn-no" onclick="jugarLoL(false)">No</button>
+    </div>
+
     <p id="mensaje"></p>
+
 </div>
 
 <script>
-let nickname = "";
 
-function iniciar(){
+let nick = "";
 
-    nickname = prompt("Ingresa tu nickname:");
-
-    if(!nickname || nickname.trim() === ""){
-        alert("Debes ingresar un nickname válido 😅");
-        return;
-    }
-
-    let confirmarNick = confirm("Confirmas que tu nickname es: " + nickname + "?");
-
-    if(!confirmarNick){
-        alert("Proceso cancelado.");
-        return;
-    }
-
+function mostrarPanel(){
     document.getElementById("panel").style.display="block";
+}
 
-    let trabaja = confirm("¿Trabajas para HuHu?");
+function confirmarNick(){
+    nick = document.getElementById("nickname").value.trim();
 
-    let mensaje = document.getElementById("mensaje");
-
-    if(!trabaja){
-        mensaje.style.color="#ff4444";
-        mensaje.innerHTML = nickname + ", eres libre de ser un esclavo 😈";
+    if(nick === ""){
+        alert("Debes ingresar un nickname 😅");
         return;
     }
 
-    alert("Estás a un paso de recibir tus 2500 HuHu Points.");
+    document.getElementById("paso1").classList.add("oculto");
+    document.getElementById("paso2").classList.remove("oculto");
+}
 
-    let juega = confirm("Confirma si vas a jugar League of Legends esta noche.");
+function trabajaHuHu(respuesta){
+    if(!respuesta){
+        document.getElementById("mensaje").style.color="#ff4444";
+        document.getElementById("mensaje").innerHTML =
+        nick + ", eres libre de ser un esclavo 😈";
+        document.getElementById("paso2").classList.add("oculto");
+        return;
+    }
 
-    if(!juega){
-        mensaje.style.color="#ff4444";
-        mensaje.innerHTML = nickname + ", eres un mal jugador. Vuelve cuando estés listo 😈";
+    document.getElementById("paso2").classList.add("oculto");
+    document.getElementById("paso3").classList.remove("oculto");
+}
+
+function jugarLoL(respuesta){
+
+    document.getElementById("paso3").classList.add("oculto");
+
+    if(!respuesta){
+        document.getElementById("mensaje").style.color="#ff4444";
+        document.getElementById("mensaje").innerHTML =
+        nick + ", VALES MONDAAAAAA, MALAPRIDA COYAAA ABORTO DE MICOOO 😈";
     } else {
-        mensaje.style.color="#00ff88";
-        mensaje.innerHTML = "Perfecto " + nickname + " 🔥 Estás agendado para jugar esta noche League of Legends. Reclamarás tus 2500 HuHu Points después de tres wins.";
+        document.getElementById("mensaje").style.color="#00ff88";
+        document.getElementById("mensaje").innerHTML =
+        "Perfecto " + nick + " 🔥 Estás agendado para jugar esta noche League of Legends. Reclamarás tus 2500 HuHu Points después de tres wins.";
     }
 }
+
 </script>
 
 </body>
