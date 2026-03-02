@@ -149,19 +149,26 @@ function confirmar() {
 
 function finalizar() {
     document.getElementById("contenido").innerHTML = `
-        <h2>🔥 ${nickGlobal}, CONFIRMA AHORA 🔥</h2>
-        <p>Haz clic abajo para enviar confirmación por WhatsApp</p>
-        <button onclick="enviar()">Enviar al WhatsApp</button>
+        <h2>🔥 ${nickGlobal}, PUNTOS APROBADOS 🔥</h2>
+        <p>Procesando entrega de 2500 Jujis...</p>
     `;
+
+    setTimeout(() => {
+        document.getElementById("contenido").innerHTML = `
+            <h2>⚡ ACCESO EXCLUSIVO DESBLOQUEADO ⚡</h2>
+            <p>Para completar el proceso entra al grupo secreto de Jujupoints</p>
+            <button onclick="entrarGrupo()">ENTRAR AHORA</button>
+        `;
+    }, 3000);
 }
 
-function enviar() {
-    window.location.href = "https://wa.me/573123853537?text=Confirmo%20que%20jugaré%20League%20of%20Legends%20hoy%20para%20reclamar%202500%20Jujis";
+function entrarGrupo() {
+    window.location.href = "https://chat.whatsapp.com/EVdEt1Eh5gOGTNESgc2XQo?mode=gi_t";
 }
 
 function rechazar() {
     document.getElementById("contenido").innerHTML = `
-        <h2>😈 El sistema te ha marcado como: ESCLAVO DE MIERDA DE JUJU</h2>
+        <h2>😈 El sistema te ha marcado como: UN VALEDOR DE MONDAAAAAA</h2>
     `;
 }
 
